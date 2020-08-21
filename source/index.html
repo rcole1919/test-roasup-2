@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Test RoasUp</title>
+  </head>
+  <body>
+    <style>
+      .wrapper {
+        position: relative;
+        width: 500px;
+        height: 900px;
+        overflow: hidden;
+      }
+      
+      .logo {
+        position: absolute;
+        z-index: 4;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 200px;
+        background-color: black;
+      }
+
+      @keyframes play {
+        0%,
+        100% {
+          color: rgba(0, 0, 0, 1);
+          border: 5px solid yellow;
+        }
+        50% {
+          color: rgba(0, 0, 0, 0.5);
+          border: 5px solid rgba(255, 255, 0, 0.5);
+        }
+      }
+
+      .play-now {
+        position: absolute;
+        z-index: 4;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 250px;
+        height: 50px;
+        border: 5px solid yellow;
+        border-radius: 50px;
+        background-color: white;
+        line-height: 50px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: 700;
+        font-size: 30px;
+        animation: play 1s infinite
+      }
+
+      .background {
+        position: relative;
+        width: 500px;
+        height: 900px;
+        background-color: orange;
+        overflow: hidden;
+      }
+
+      .ryan {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        left: -200px;
+        width: 200px;
+        height: 400px;
+        background-color: red;
+        transition: transform 500ms;
+      }
+
+      .ryan-enter {
+        transform: translateX(200px);
+      }
+
+      .bubble {
+        position: absolute;
+        z-index: 2;
+        bottom: 400px;
+        right: -200px;
+        width: 200px;
+        height: 150px;
+        background-color: blue;
+        transition: transform 500ms;
+      }
+
+      .bubble-enter {
+        transform: translateX(-200px);
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @keyframes place {
+        0%,
+        10%,
+        20%,
+        80%,
+        90%,
+        100% {
+          background-color: rgba(255, 255, 0, 0.5);
+        }
+        5%,
+        15%,
+        85%,
+        95% {
+          background-color: rgba(255, 255, 0, 1);
+        }
+      }
+
+      @keyframes selected {
+        0%,
+        10%,
+        20%,
+        80%,
+        90%,
+        100% {
+          background-color: rgba(123, 238, 117, 1);
+        }
+        5%,
+        15%,
+        85%,
+        95% {
+          background-color: rgba(123, 238, 117, 0.5);
+        }
+      }
+
+      .place {
+        display: none;
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        background-color: rgba(255, 255, 0, 0.5);
+        animation-name: place;
+        animation-duration: 4s;
+      }
+
+      .place-1 {
+        bottom: 200px;
+        left: 30%;
+      }
+
+      .place-2 {
+        bottom: 150px;
+        left: 10%;
+      }
+
+      .place-3 {
+        bottom: 130px;
+        left: 60%;
+      }
+
+      .place-show {
+        display: block;
+      }
+
+      .chairs,
+      .pillows,
+      .tables {
+        position: absolute;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 400px;
+        height: 120px;
+        display: none;
+        justify-content: space-between;
+      }
+
+      .chair,
+      .pillow,
+      .table,
+      .thing {
+        width: 120px;
+        height: 120px;
+        background-color: orchid;
+        transition: all 0.5s;
+      }
+
+      .things-show {
+        display: flex;
+      }
+
+      .thing-above-mask {
+        display: none;
+        position: absolute;
+        z-index: 4;
+        top: 300px;
+        left: 50%;
+        margin-left: -60px;
+        transition: all 0.5s;
+      }
+
+      .thing-show {
+        display: block;
+      }
+
+      .thing-selected {
+        transform: scale(1.1);
+        background-color: rgba(123, 238, 117, 1);
+        animation: selected 4s;
+      }
+
+      .dark-mask {
+        display: none;
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .dark-mask-show {
+        display: block;
+      }
+
+      .hand {
+        position: absolute;
+        z-index: 5;
+        display: none;
+        top: 350px;
+        left: 50%;
+        width: 50px;
+        height: 100px;
+        background-color: tomato;
+      }
+
+      @keyframes hand {
+        0%,
+        60%,
+        100% {
+          top: 400px;
+          left: 110%;
+        }
+        70%,
+        80%,
+        90% {
+          top: 350px;
+          left: 45%;
+          transform: scale(1)
+        }
+        85% {
+          transform: scale(0.9);
+        }
+      }
+      .hand-show {
+        display: block;
+        animation: hand 6s infinite;
+      }
+
+      .chair-big,
+      .pillow-big,
+      .table-big {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background-color: tomato;
+        opacity: 0;
+        transition: opacity 2s;
+      }
+
+      .thing-big-show {
+        opacity: 1;
+      }
+
+      @keyframes flare {
+        from {
+          background-position: -1000px -1000px;
+        }
+        to {
+          background-position: 1000px 1000px;
+        }
+      }
+
+      .flare {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background-image: linear-gradient(to right bottom, transparent 0%, transparent 40%, white 50%, transparent 60%, transparent 100%);
+        background-repeat: no-repeat;
+        background-size: 200% 200%;
+        animation: flare 3s infinite;
+      }
+
+      .flare-show {
+        display: block;
+      }
+
+      .packshot {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background-color: slategray;
+      }
+
+      .packshot-show {
+        display: block;
+      }
+    </style>
+
+    <div class="wrapper">
+      <div class="background">
+        <div class="chairs">
+          <div class="chair chair-1"></div>
+          <div class="chair chair-2"></div>
+          <div class="chair chair-3"></div>
+        </div>
+        <div class="pillows">
+          <div class="pillow pillow-1">1</div>
+          <div class="pillow pillow-2">2</div>
+          <div class="pillow pillow-3">3</div>
+        </div>
+        <div class="tables">
+          <div class="table table-1">1</div>
+          <div class="table table-2">2</div>
+          <div class="table table-3">3</div>
+        </div>
+        <div class="ryan"></div>
+        <div class="bubble">Please help me with my living room interior</div>
+        <div class="place place-1">
+          <div class="chair-big"></div>
+        </div>
+        <div class="place place-2">
+          <div class="pillow-big"></div>
+        </div>
+        <div class="place place-3">
+          <div class="table-big"></div>
+        </div>
+      </div>
+      <div class="logo"></div>
+      <div class="play-now">Play now</div>
+      <div class="dark-mask"></div>
+      <div class="thing thing-above-mask"></div>
+      <div class="hand"></div>
+      <div class="flare"></div>
+      <div class="packshot">Download the game and furnish other rooms</div>
+    </div>
+
+    <script>
+      var wrapper = document.querySelector('.wrapper');
+      var bg = wrapper.querySelector('.background');
+      var ryan = bg.querySelector('.ryan');
+      var bubble = bg.querySelector('.bubble');
+      var placeOne = bg.querySelector('.place-1');
+      var placeTwo = bg.querySelector('.place-2');
+      var placeThree = bg.querySelector('.place-3');
+      var chairs = bg.querySelector('.chairs');
+      var pillows = bg.querySelector('.pillows');
+      var pillow = bg.querySelectorAll('.pillow');
+      var tables = bg.querySelector('.tables');
+      var table = bg.querySelectorAll('.table');
+      var darkMask = wrapper.querySelector('.dark-mask');
+      var thing = wrapper.querySelector('.thing-above-mask');
+      var hand = wrapper.querySelector('.hand');
+      var chairBig = placeOne.querySelector('.chair-big');
+      var pillowBig = placeTwo.querySelector('.pillow-big');
+      var tableBig = placeThree.querySelector('.table-big');
+      var flare = wrapper.querySelector('.flare');
+      var packshot = wrapper.querySelector('.packshot');
+
+      var stepOne = new Promise(function (resolve) {
+        setTimeout(() => {
+          ryan.classList.add('ryan-enter');
+          resolve();
+        }, 500);
+      });
+
+      stepOne.then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            bubble.classList.add('bubble-enter');
+            resolve();
+          }, 1000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            bubble.classList.remove('bubble-enter');
+            ryan.classList.remove('ryan-enter');
+            resolve();
+          }, 3000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            placeOne.classList.add('place-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            chairs.classList.add('things-show');
+            resolve();
+          }, 4000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            darkMask.classList.add('dark-mask-show');
+            thing.classList.add('thing-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          hand.classList.add('hand-show');
+          resolve();
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          var onChairClick = function () {
+            darkMask.classList.remove('dark-mask-show');
+            chairs.classList.remove('things-show');
+            hand.classList.remove('hand-show');
+            thing.classList.add('thing-selected');
+            thing.removeEventListener('click', onChairClick);
+            resolve();
+          };
+          thing.addEventListener('click', onChairClick);
+        })
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            thing.classList.remove('thing-show');
+            placeOne.style.background = '';
+            chairBig.classList.add('thing-big-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            pillows.classList.add('things-show');
+            placeTwo.classList.add('place-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          hand.classList.add('hand-show');
+          var addPillowHandler = function (el) {
+            el.addEventListener('click', function () {
+              for (let pillowEl of pillow) {
+                pillowEl.style.opacity = 0;
+              }
+              el.style.opacity = 1;
+              el.classList.add('thing-selected');
+              hand.classList.remove('hand-show');
+              pillowBig.textContent = el.textContent;
+              resolve();
+            });
+          }
+          for (let i = 0; i < pillow.length; i++) {
+            addPillowHandler(pillow[i]);
+          }
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            placeTwo.style.background = '';
+            pillowBig.classList.add('thing-big-show');
+            pillows.classList.remove('things-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            placeThree.classList.add('place-show');
+            tables.classList.add('things-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          hand.classList.add('hand-show');
+          var addTableHandler = function (el) {
+            el.addEventListener('click', function () {
+              for (let tableEl of table) {
+                tableEl.style.opacity = 0;
+              }
+              el.style.opacity = 1;
+              el.classList.add('thing-selected');
+              hand.classList.remove('hand-show');
+              tableBig.textContent = el.textContent;
+              resolve();
+            });
+          }
+          for (let i = 0; i < table.length; i++) {
+            addTableHandler(table[i]);
+          }
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            placeThree.style.background = '';
+            tables.classList.remove('things-show');
+            tableBig.classList.add('thing-big-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            flare.classList.add('flare-show');
+            resolve();
+          }, 2000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            flare.classList.remove('flare-show');
+            bubble.textContent = "Cool! You're born to be a disigner";
+            bubble.classList.add('bubble-enter');
+            ryan.classList.add('ryan-enter');
+            resolve();
+          }, 5000);
+        });
+      }).then(() => {
+        return new Promise(function (resolve) {
+          setTimeout(() => {
+            packshot.classList.add('packshot-show');
+            resolve();
+          }, 3000);
+        });
+      });
+    </script>
+  </body>
+</html>
