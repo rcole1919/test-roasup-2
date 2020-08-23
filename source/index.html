@@ -453,7 +453,7 @@
         left: 25%;
         width: 70px;
         height: 70px;
-        border: 8px dotted blue;
+        border: 8px dotted gold;
         border-radius: 50%;
         animation: flare 2s infinite;
         animation-delay: 0.1s;
@@ -465,7 +465,7 @@
         left: 75%;
         width: 70px;
         height: 70px;
-        border: 8px dotted red;
+        border: 8px dotted rgb(71, 155, 233);
         border-radius: 50%;
         animation: flare 2s infinite;
         animation-delay: 0.2s;
@@ -486,7 +486,7 @@
         background-image: var(--packshot);
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 100%;
+        background-size: auto 100%;
       }
 
       .packshot-show {
@@ -566,10 +566,15 @@
           box-shadow: 0 0 0 7px yellow,
                       0 0 15px 10px white;
           background-position: center top 20px;
+          background-size: 70%;
         }
 
         .pillow {
           background-position: center top 50px;
+        }
+
+        .table {
+          background-position: center top 10px;
         }
 
         .thing-above-mask {
@@ -581,6 +586,7 @@
           top: 500px;
           width: 102px;
           height: 276px;
+          background-size: auto 80%;
         }
 
         @keyframes hand {
@@ -620,6 +626,140 @@
           height: 528px;
         }
       }
+
+      @media (max-height: 1080px) {
+        .wrapper {
+          height: 1080px;
+        }
+
+        .background {
+          width: 600px;
+          height: 1080px;
+        }
+
+        .logo {
+          width: 355px;
+          height: 178px;
+        }
+
+        .play-now {
+          width: 344px;
+          height: 94px;
+          font-size: 42px;
+          line-height: 94px;
+        }
+
+        .ryan {
+          width: 400px;
+          height: 615px;
+        }
+
+        .bubble {
+          bottom: 533px;
+          width: 346px;
+          height: 206px;
+          font-size: 38px;
+        }
+
+        .place-1 {
+          width: 384px;
+          height: 124px;
+          bottom: 230px;
+          left: 148px;
+        }
+
+        .place-2 {
+          width: 373px;
+          height: 132px;
+          bottom: 170px;
+        }
+
+        .place-3 {
+          width: 265px;
+          height: 145px;
+          bottom: 119px;
+        }
+
+        .chairs,
+        .pillows,
+        .tables {
+          top: 275px;
+          width: 547px;
+          height: 170px;
+          padding: 5px;
+        }
+
+        .chair,
+        .pillow,
+        .table,
+        .thing {
+          width: 160px;
+          height: 160px;
+          border: 2px ridge #e3e3e3;
+          border-radius: 5px;
+          box-shadow: 0 0 0 5px yellow,
+                      0 0 12px 10px white;
+          background-position: center top 20px;
+          background-size: 70%;
+        }
+
+        .pillow {
+          background-position: center top 35px;
+        }
+
+        .table {
+          background-position: center top 10px;
+        }
+
+        .thing-above-mask {
+          top: 280px;
+          margin-left: -80px;
+        }
+
+        .hand {
+          top: 350px;
+          width: 96px;
+          height: 215px;
+          background-size: auto 80%;
+        }
+
+        @keyframes hand {
+          0%,
+          60%,
+          100% {
+            top: 500px;
+            left: 110%;
+          }
+          70%,
+          80%,
+          90% {
+            top: 350px;
+            left: 45%;
+            transform: scale(1)
+          }
+          85% {
+            transform: scale(0.9);
+          }
+        }
+
+        .chair-big {
+          bottom: -150px;
+          width: 417px;
+          height: 469px;
+        }
+
+        .pillow-big {
+          bottom: -130px;
+          width: 500px;
+          height: 293px;
+        }
+
+        .table-big {
+          bottom: -50px;
+          width: 333px;
+          height: 411px;
+        }
+      }
     </style>
 
     <div class="wrapper">
@@ -656,16 +796,16 @@
         </div>
         <div class="dark-mask"></div>
         <div class="packshot"></div>
+        <div class="flare">
+          <div class="flare-1"></div>
+          <div class="flare-2"></div>
+          <div class="flare-3"></div>
+        </div>
       </div>
       <div class="logo"></div>
       <div class="play-now">Play now</div>
       <div class="thing thing-above-mask"></div>
       <div class="hand"></div>
-      <div class="flare">
-        <div class="flare-1"></div>
-        <div class="flare-2"></div>
-        <div class="flare-3"></div>
-      </div>
     </div>
 
     <script>
